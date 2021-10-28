@@ -27,8 +27,8 @@ function init() {
 
     pointLight = new THREE.PointLight(0xffffff, 0.6, 0)
     pointLight.position.set(2000, 6000, 0)
-    pointLight.shadowMapWidth = 2048
-    pointLight.shadowMapHeight = 2048
+    pointLight.shadow.mapSize.width = 2048
+    pointLight.shadow.mapSize.height = 2048
     pointLight.shadow.camera.near = 0.1
     pointLight.shadow.camera.far = 20000
     pointLight.castShadow = true
