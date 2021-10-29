@@ -8,10 +8,10 @@ let rotate = true
 let axesHelper
 
 let scene, camera, renderer
-let pillarExtGeometry, topExtGeometry, pillarIntGeometry, topIntGeometry, pillarMidGeometry, groundGeometry
-let pillarExtMaterial, topExtMaterial, pillarIntMaterial, topIntMaterial, pillarMidMaterial, groundMaterial
-let pillarExtTexture, topExtTexture, pillarIntTexture, topIntTexture, pillarMidTexture, groundTexture
-let pillarExt, topExt, pillarInt, topInt, pillarMid, ground
+let pillarExtGeometry, topExtGeometry, pillarIntGeometry, topIntGeometry, pillarMidGeometry, groundGeometry, altarGeometry, altarTopGeometry
+let pillarExtMaterial, topExtMaterial, pillarIntMaterial, topIntMaterial, pillarMidMaterial, groundMaterial, altarMaterial, altarTopMaterial
+let pillarExtTexture, topExtTexture, pillarIntTexture, topIntTexture, pillarMidTexture, groundTexture, altarTexture, altarTopTexture
+let pillarExt, topExt, pillarInt, topInt, pillarMid, ground, altar, altarTop
 let ambientLight, pointLight
 let controls
 
@@ -26,7 +26,7 @@ function init() {
     renderer.shadowMap.type = THREE.BasicShadowMap
     document.body.appendChild(renderer.domElement)
 
-    camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 20000)
+    camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 30000)
     camera.position.z = 4500
     camera.position.y = 2500
     camera.lookAt(0, 0, 0)
@@ -49,7 +49,7 @@ function init() {
     pointLight.shadow.mapSize.width = 2048
     pointLight.shadow.mapSize.height = 2048
     pointLight.shadow.camera.near = 0.1
-    pointLight.shadow.camera.far = 20000
+    pointLight.shadow.camera.far = 35000
     pointLight.castShadow = true
     scene.add(pointLight)
 
@@ -57,8 +57,8 @@ function init() {
     groundGeometry = new THREE.PlaneGeometry(1024, 1024)
     groundMaterial = new THREE.MeshPhongMaterial({ map: groundTexture })
 
-    for (let i = -9; i < 10; i++) {
-        for (let j = -9; j < 10; j++) {
+    for (let i = -19; i < 20; i++) {
+        for (let j = -19; j < 20; j++) {
             ground = new THREE.Mesh(groundGeometry, groundMaterial)
             ground.position.x = i * 1024
             ground.position.z = j * 1024
@@ -144,6 +144,32 @@ function init() {
         pillarMid.castShadow = true
         scene.add(pillarMid)
     }
+
+    altarTexture = new THREE.TextureLoader().load('textures/stone-1024.jpg')
+    altarGeometry = new THREE.BoxGeometry(700, 200, 400)
+    altarMaterial = new THREE.MeshPhongMaterial({ map: altarTexture })
+
+    altar = new THREE.Mesh(altarGeometry, altarMaterial)
+    altar.position.y = 100
+    altar.position.x = 350 * Math.cos(THREE.MathUtils.degToRad(135))
+    altar.position.z = 350 * Math.sin(THREE.MathUtils.degToRad(135))
+    altar.rotation.y = -THREE.MathUtils.degToRad(45)
+    altar.receiveShadow = true
+    altar.castShadow = true
+    scene.add(altar)
+
+    altarTopTexture = new THREE.TextureLoader().load('textures/stone-1024.jpg')
+    altarTopGeometry = new THREE.BoxGeometry(740, 20, 440)
+    altarTopMaterial = new THREE.MeshPhongMaterial({ map: altarTopTexture })
+
+    altarTop = new THREE.Mesh(altarTopGeometry, altarTopMaterial)
+    altarTop.position.y = 210
+    altarTop.position.x = 350 * Math.cos(THREE.MathUtils.degToRad(135))
+    altarTop.position.z = 350 * Math.sin(THREE.MathUtils.degToRad(135))
+    altarTop.rotation.y = -THREE.MathUtils.degToRad(45)
+    altarTop.receiveShadow = true
+    altarTop.castShadow = true
+    scene.add(altarTop)
 
     panel()
 
