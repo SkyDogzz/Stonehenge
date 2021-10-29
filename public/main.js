@@ -53,20 +53,16 @@ function init() {
     pointLight.castShadow = true
     scene.add(pointLight)
 
-    groundTexture = new THREE.TextureLoader().load('textures/grass-1024.png')
-    groundGeometry = new THREE.PlaneGeometry(1024, 1024)
-    groundMaterial = new THREE.MeshPhongMaterial({ map: groundTexture })
+    groundTexture = new THREE.TextureLoader().load( 'textures/grass-1500.png');
+    groundTexture.wrapS = THREE.RepeatWrapping;
+    groundTexture.wrapT = THREE.RepeatWrapping;
+    groundTexture.repeat.set( 50, 50 );
 
-    for (let i = -19; i < 20; i++) {
-        for (let j = -19; j < 20; j++) {
-            ground = new THREE.Mesh(groundGeometry, groundMaterial)
-            ground.position.x = i * 1024
-            ground.position.z = j * 1024
-            ground.rotation.x = - THREE.MathUtils.degToRad(90)
-            ground.receiveShadow = true
-            scene.add(ground)
-        }
-    }
+    groundGeometry = new THREE.BoxGeometry(100000,0.01, 100000)    
+
+    groundMaterial = new THREE.MeshPhongMaterial({ map: groundTexture })
+    ground = new THREE.Mesh(groundGeometry, groundMaterial)
+    scene.add(ground)
 
     pillarExtTexture = new THREE.TextureLoader().load('textures/stone-1024.jpg')
     pillarExtGeometry = new THREE.BoxGeometry(200, 500, 100)
