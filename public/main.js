@@ -145,7 +145,27 @@ function init() {
         scene.add(pillarMid)
     }
 
+    panel()
 
+    window.addEventListener('resize', onWindowResize)
+}
+
+function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight
+    camera.updateProjectionMatrix()
+
+    renderer.setSize(window.innerWidth, window.innerHeight)
+}
+
+function animate() {
+    requestAnimationFrame(animate)
+
+    scene.rotation.y += rotationSpeed * rotate
+
+    renderer.render(scene, camera)
+}
+
+function panel() {
     var params = {
         rotationSpeed: 0.005,
         switch: true,
@@ -174,21 +194,4 @@ function init() {
     pointLightFolder.add(pointLight.position, 'y', 0, 10000).name('Y')
     pointLightFolder.add(pointLight.position, 'z', -5000, 5000).name('Z')
 
-
-    window.addEventListener('resize', onWindowResize)
-}
-
-function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight
-    camera.updateProjectionMatrix()
-
-    renderer.setSize(window.innerWidth, window.innerHeight)
-}
-
-function animate() {
-    requestAnimationFrame(animate)
-
-    scene.rotation.y += rotationSpeed * rotate
-
-    renderer.render(scene, camera)
 }
