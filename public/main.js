@@ -1,6 +1,6 @@
 import * as THREE from '../node_modules/three/build/three.module.js'
-import { OrbitControls } from 'https://cdn.skypack.dev/three@0.133.1/examples/jsm/controls/OrbitControls.js';
-import { GUI } from '../node_modules/three/examples/jsm/libs/dat.gui.module.js';
+import { OrbitControls } from 'https://cdn.skypack.dev/three@0.133.1/examples/jsm/controls/OrbitControls.js'
+import { GUI } from '../node_modules/three/examples/jsm/libs/dat.gui.module.js'
 
 let rotationSpeed = 0.005
 let rotate = true
@@ -19,27 +19,27 @@ init()
 animate()
 
 function init() {
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+    renderer.setPixelRatio(window.devicePixelRatio)
+    renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.shadowMap.enabled = true
     renderer.shadowMap.type = THREE.BasicShadowMap
-    document.body.appendChild(renderer.domElement);
+    document.body.appendChild(renderer.domElement)
 
-    camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 20000);
+    camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 20000)
     camera.position.z = 4500
     camera.position.y = 2500
     camera.lookAt(0, 0, 0)
 
-    controls = new OrbitControls(camera, renderer.domElement);
+    controls = new OrbitControls(camera, renderer.domElement)
     controls.enablePan = false
     controls.maxPolarAngle = THREE.Math.degToRad(80)
 
-    scene = new THREE.Scene();
+    scene = new THREE.Scene()
 
-    axesHelper = new THREE.AxesHelper(10000);
+    axesHelper = new THREE.AxesHelper(10000)
     axesHelper.visible = false
-    scene.add(axesHelper);
+    scene.add(axesHelper)
 
     ambientLight = new THREE.AmbientLight(0xffffff, 0.2)
     scene.add(ambientLight)
@@ -150,45 +150,45 @@ function init() {
         rotationSpeed: 0.005,
         switch: true,
         helper: false
-    };
+    }
 
-    const gui = new GUI()
+    const gui = new GUI({ width: 320 })
 
     const cameraFolder = gui.addFolder('Camera')
-    cameraFolder.add(params, "switch").name("Auto Rotation").onChange(() => {
+    cameraFolder.add(params, 'switch').name('Auto Rotation').onChange(() => {
         rotate = !rotate
-    });
-    cameraFolder.add(params, "rotationSpeed", -0.1,0.1).name('Rotation Speed').onChange((speed) =>{
+    })
+    cameraFolder.add(params, 'rotationSpeed', -0.1, 0.1).name('Rotation Speed').onChange((speed) => {
         rotationSpeed = speed
     })
-    cameraFolder.add(params, "helper").name("Axes Helper").onChange(() => {
+    cameraFolder.add(params, 'helper').name('Axes Helper').onChange(() => {
         axesHelper.visible = !axesHelper.visible
-    });
+    })
 
     const lightsFolder = gui.addFolder('Lights')
     const ambientLightFolder = lightsFolder.addFolder('Ambient Light')
-    ambientLightFolder.add(ambientLight, "intensity", 0,1).name('Intensity')
+    ambientLightFolder.add(ambientLight, 'intensity', 0, 1).name('Intensity')
     const pointLightFolder = lightsFolder.addFolder('Point Light')
-    pointLightFolder.add(pointLight, "intensity", 0,1).name('Intensity')
-    pointLightFolder.add(pointLight.position, "x", -5000,5000).name('X')
-    pointLightFolder.add(pointLight.position, "y", 0,10000).name('Y')
-    pointLightFolder.add(pointLight.position, "z", -5000,5000).name('Z')
-    
+    pointLightFolder.add(pointLight, 'intensity', 0, 1).name('Intensity')
+    pointLightFolder.add(pointLight.position, 'x', -5000, 5000).name('X')
+    pointLightFolder.add(pointLight.position, 'y', 0, 10000).name('Y')
+    pointLightFolder.add(pointLight.position, 'z', -5000, 5000).name('Z')
 
-    window.addEventListener('resize', onWindowResize);
+
+    window.addEventListener('resize', onWindowResize)
 }
 
 function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
+    camera.aspect = window.innerWidth / window.innerHeight
+    camera.updateProjectionMatrix()
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(window.innerWidth, window.innerHeight)
 }
 
 function animate() {
-    requestAnimationFrame(animate);
+    requestAnimationFrame(animate)
 
     scene.rotation.y += rotationSpeed * rotate
 
-    renderer.render(scene, camera);
+    renderer.render(scene, camera)
 }
