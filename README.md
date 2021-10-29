@@ -12,7 +12,7 @@ npm install
 
 ## Task list
 
- - [ ] Seamless grass
+ - [x] Seamless grass
  - [ ] Add a puddle
  - [ ] Fps control with colision
  - [ ] Before after filter
