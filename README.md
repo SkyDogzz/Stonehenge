@@ -1,3 +1,4 @@
+
 # Discovering three.js by remaking Stonehenge
 The first project i made to initiate myself to three.js
 
@@ -8,3 +9,10 @@ git clone https://github.com/SkyDogzz/Stonehenge.git
 
 # install the dependencies
 npm install
+
+## Task list
+
+ - [ ] Seamless grass
+ - [ ] Add a puddle
+ - [ ] Fps control with colision
+ - [ ] Before after filter
